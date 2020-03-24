@@ -12,6 +12,9 @@ services:
       - /app/node_modules
     environment:
       DB_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: poll-server
     networks:
       - poll
 

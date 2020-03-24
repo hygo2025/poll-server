@@ -4,26 +4,26 @@ const { database, host, password, username } = require('../config/vars')
 
 module.exports = {
   development: {
-    database: database,
-    username: username,
-    password: password,
+    database: process.env.POSTGRES_DB,
+    username: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
     host: process.env.DB_HOST,
     dialect: 'postgres',
   },
 
   test: {
-    database: database,
-    username: username,
-    password: password,
-    host: host,
+    database: process.env.POSTGRES_DB,
+    username: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
+    host: process.env.DB_HOST,
     dialect: 'postgres',
   },
 
   production: {
-    database: database,
-    username: username,
-    password: password,
-    host: host,
+    database: process.env.POSTGRES_DB,
+    username: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
+    host: process.env.DB_HOST,
     dialect: 'postgres',
   },
 }
