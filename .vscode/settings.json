@@ -1,0 +1,15 @@
+{
+  "standard.enable": false,
+  "editor.formatOnSave": true,
+  "eslint.validate": [
+    {
+      "language": "javascript",
+      "autoFix": true
+    }
+  ],
+  "sonarlint.connectedMode.project": {
+    "serverId": "backendpag",
+    "projectKey": "backendpag_token-service"
+  },
+  "jest.pathToJest": "yarn test:unit"
+}
