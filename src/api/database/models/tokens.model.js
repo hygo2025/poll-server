@@ -10,13 +10,13 @@ module.exports = function(sequelize, DataTypes) {
         field: 'id',
       },
       access: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(4096),
         allowNull: false,
         primaryKey: false,
         field: 'access',
       },
       refresh: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(4096),
         allowNull: false,
         primaryKey: false,
         field: 'refresh',
