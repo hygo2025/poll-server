@@ -1,0 +1,30 @@
+version: '3'
+services:
+  app:
+    build: ./
+    depends_on:
+      - postgres
+    ports:
+      - '4000:4000'
+    command: yarn dev
+    volumes:
+      - .:/app/
+      - /app/node_modules
+    environment:
+      DB_HOST: postgres
+    networks:
+      - poll
+
+  postgres:
+    image: postgres:10.4
+    ports:
+      - '35432:5432'
+    networks:
+      - poll
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: poll-server
+
+networks:
+  poll:
