@@ -62,7 +62,16 @@ export const edit = async (id, obj) => {
   return poll
 }
 
-const validateOptions = async (id, pollId) => {
+const validateOptions = async (id, pollId, user) => {
+  const poll = await db.Polls.findByPk(pollId)
+
+  if (poll && poll.loginRequired && !user) {
+    throw new CustomError({
+      message: 'Login is required',
+      status: httpStatus.BAD_REQUEST,
+    })
+  }
+
   const options = await db.PollOptions.findAll({
     where: { pollId: pollId },
   })
@@ -71,8 +80,8 @@ const validateOptions = async (id, pollId) => {
   return !!found
 }
 
-export const answer = async (pollId, answerid, user) => {
-  const isValid = await validateOptions(answerid, pollId)
+export const answer = async (pollId, id, user, answerid) => {
+  const isValid = await validateOptions(id, pollId, user)
   if (!isValid) {
     throw new CustomError({
       message: 'Invalid options',
@@ -80,9 +89,15 @@ export const answer = async (pollId, answerid, user) => {
     })
   }
 
+  if (answerid) {
+    const result = await db.Answers.findByPk(answerid)
+    result.optionId = id
+    return await result.save()
+  }
+
   const answer = {
     pollId: pollId,
-    optionId: answerid,
+    optionId: id,
     userId: (user || {}).userId || null,
   }
 
@@ -129,4 +144,8 @@ export const listPollsWithoutAssociation = async () => {
       },
     ],
   })
+}
+
+export const getAnswer = async (id, answerid) => {
+  return db.Answers.findByPk(answerid)
 }

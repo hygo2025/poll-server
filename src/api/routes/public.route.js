@@ -24,7 +24,12 @@ router
 
 router.route('/public/polls/:id').patch(pollController.edit)
 
-router.route('/public/polls/:id/answers/:answerid').post(pollController.answer)
+router.route('/public/polls/:id/answers').post(pollController.answer)
+router.route('/public/polls/:id/answers/:answerid').patch(pollController.answer)
+router
+  .route('/public/polls/:id/answers/:answerid')
+  .get(pollController.getAnswer)
+
 router.route('/public/polls/:id').get(pollController.get)
 
 export default router

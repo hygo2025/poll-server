@@ -85,11 +85,23 @@ export const graph = async (req, res, next) => {
 
 export const answer = async (req, res, next) => {
   try {
+    const { id } = req.body
     const pollId = req.params.id
     const answerid = req.params.answerid
     const user = await decodeToken(req)
 
-    const answer = await pollService.answer(pollId, answerid, user)
+    const answer = await pollService.answer(pollId, id, user, answerid)
+    res.status(httpStatus.OK)
+    res.json(answer.toJSON())
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const getAnswer = async (req, res, next) => {
+  try {
+    const { id, answerid } = req.params
+    const answer = await pollService.getAnswer(id, answerid)
     res.status(httpStatus.OK)
     res.json(answer.toJSON())
   } catch (error) {

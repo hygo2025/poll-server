@@ -21,6 +21,13 @@ module.exports = function(sequelize, DataTypes) {
         primaryKey: false,
         field: 'userId',
       },
+      loginRequired: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+        primaryKey: false,
+        field: 'loginRequired',
+      },
       createdAt: {
         type: DataTypes.DATE,
         allowNull: false,

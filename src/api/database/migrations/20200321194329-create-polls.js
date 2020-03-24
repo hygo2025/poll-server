@@ -25,6 +25,13 @@ module.exports = {
             primaryKey: false,
             field: 'userId',
           },
+          loginRequired: {
+            type: Sequelize.BOOLEAN,
+            allowNull: false,
+            defaultValue: false,
+            primaryKey: false,
+            field: 'loginRequired',
+          },
           createdAt: {
             type: Sequelize.DATE,
             allowNull: false,
